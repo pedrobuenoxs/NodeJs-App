@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 //const mongoose = require('mongoose')
 
@@ -24,15 +25,45 @@ router.get('/categorias/add',(req,res) => {
 })
 
 router.post('/categorias/nova',(req,res) => {
-    const newCategoria = {
-        nome: req.body.nome,
-        slug: req.body.slug
+
+    var erros = [];
+
+    if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
+        erros.push({
+            texto: "Nome inválido"
+        })
+        
     }
-    new Categoria(newCategoria).save().then(() => {
-        console.log("Cadastrado com sucesso")
-    }).catch((err) => {
-        console.log("Erro ao cadastrar. " + err)
-    })
+
+    if(!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null){
+        erros.push({
+            texto: "Slug inválido"
+        })
+        
+    }
+
+    if(erros.length > 0){
+        res.render("admin/addcategorias", {erros: erros})
+        
+    } else {
+        
+        const newCategoria = {
+            nome: req.body.nome,
+            slug: req.body.slug
+        };
+    
+        new Categoria(newCategoria).save().then(() => {
+            req.flash('success_msg', "Successfully created category!");
+            res.redirect("/admin/categorias")
+        }).catch((err) => {
+            req.flash("error_msg", "There was an error registering the category, please try again!");
+            res.redirect("/admin")
+            
+        })
+    }
+
+ 
+    
 })
 
 

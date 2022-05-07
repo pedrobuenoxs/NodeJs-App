@@ -9,10 +9,36 @@ const path = require('path')
 //grupo de rotas 'admin'
 const admin = require('./routes/admin');
 
+//config session
+const session = require('express-session');
+const flash = require('connect-flash');
+
+
+
 //mongoose
 const mongoose = require('mongoose');
 
+
 //configurações
+    //Sessão
+    
+    app.use(session({
+        secret: 'teste',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: true }
+    }))
+    app.use(flash())
+
+    //Middleware
+    /
+    app.use((req, res, next) => {
+        res.locals.success_msg = req.flash('success_msg');
+        res.locals.error_msg = req.flash('error_msg');
+        next()
+    })
+
+
     //body-parsers
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
@@ -37,7 +63,7 @@ const mongoose = require('mongoose');
 
 //servidor
 
-const PORT = 8081;
+const PORT = 3000;
 app.listen(PORT,() => {
     console.log('Servidor on-line');
 })

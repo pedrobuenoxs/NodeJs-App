@@ -20,3 +20,4 @@ const  Categoria = new Schema({
 const categoria = mongoose.model('categoria', Categoria);
 
 module.exports = categoria;
+
