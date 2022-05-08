@@ -1,3 +1,5 @@
+const db = require("./config/db")
+
 //Módulos
 const express = require('express');
 const handlebars = require('express-handlebars');
@@ -50,7 +52,7 @@ const mongoose = require('mongoose');
     //Mongoose
     mongoose.Promise = global.Promise;
 
-    mongoose.connect("mongodb://localhost/db1").then(() => {
+    mongoose.connect(db.mongoURI).then(() => {
         console.log("Conectado com sucesso!")
     }).catch((erro) =>{
         console.log("Problema ao se conectar..." + erro)
@@ -63,7 +65,7 @@ const mongoose = require('mongoose');
 
 //servidor
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,() => {
     console.log('Servidor on-line');
 })
