@@ -2,15 +2,15 @@
     <div class="alert alert-danger">{{texto}}</div>
 {{else}}
 {{/each}}
-<h3>Nova categoria</h3>
+<h3>Nova postagem</h3>
 <div class="card">
     <div class="card-body">
     <form action="/admin/categorias/nova" method="POST">
-     <label for="nome">Nome:</label>
-     <input type="text" id="nome" name="nome" placeholder="nome da categoria" class="form-control mt-2">
-     <label for="slug">Slug:</label>
-     <input type="text" id="slug" name="slug" placeholder="slug da categoria" class="form-control mt-2">
-     <button type="submit" class="btn btn-success mt-4">Criar categoria</button>
+     <label for="nome">Título:</label>
+     <input type="text" id="nome" name="nome" placeholder="Dê um titulo chamativo" class="form-control mt-2">
+     <label class="mt-2" for="slug">Conteúdo:</label>
+     <input type="text" id="slug" name="slug" placeholder="Escreva sua história" class="form-control mt-2">
+     <button type="submit" class="btn btn-success mt-4">Criar post</button>
     </form>
     </div>
 </div>
