@@ -52,7 +52,7 @@ const mongoose = require('mongoose');
     //Mongoose
     mongoose.Promise = global.Promise;
 
-    mongoose.connect(db.mongoURI).then(() => {
+    mongoose.connect("mongodb://localhost/db1").then(() => {
         console.log("Conectado com sucesso!")
     }).catch((erro) =>{
         console.log("Problema ao se conectar..." + erro)
